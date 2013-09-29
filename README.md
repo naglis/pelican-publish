@@ -9,7 +9,11 @@ GitHub-style colorscheme for code snippets.
 
 ## Demo
 See it in action [here](http://najo.lt/).
-![pelican-publish](https://raw.github.com/naglis/pelican-publish/master/screenshot.png "Screenshot")
+[![pelican-publish](https://raw.github.com/naglis/pelican-publish/master/preview.png "Screenshot")](https://raw.github.com/naglis/pelican-publish/master/preview.png)
+
+## Authors
+[Konstantin Kovshenin](http://kovshenin.com/)
+[Naglis Jonaitis](http://najo.lt/)
 
 ## License
 
