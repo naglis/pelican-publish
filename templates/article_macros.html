@@ -1,0 +1,49 @@
+        {% macro article_macro(article, post_view=False) -%}
+        <article class="post hentry">
+            <header class="entry-header">
+                <h1 class="entry-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a></h1>
+            </header><!-- /.entry-header -->
+            <div class="entry-content">
+                {{ article.content }}
+            </div><!-- /.entry-content -->
+        {% include "article_meta_macro.html" %}
+            {{ entry_meta(article, post_view) }}
+        </article>
+        {%- endmacro %}
+
+        {% macro entry_meta(article, post_view=False) -%}
+            <footer class="entry-meta">
+                Posted on <a href="{{ SITEURL}}/{{ article.url }}" title="{{ article.date|strftime("%H:%M") }}" rel="bookmark"><time class="entry-date" datetime="{{ article.date|strftime("%Y-%m-%dT%H:%M:%S%z") }}" pubdate>{{ article.locale_date }}</time></a>
+                {% if post_view %}
+                {% if article.author %}by <span class="byline"><span class="author vcard"><a class="url fn n" href="{{ SITEURL }}/{{ article.author.url }}">{{ article.author }}</a></span></span>.{% endif %}
+                {% endif %}
+                {% if post_view %}
+                    {%- if article.category.name != "Uncategorized" -%}
+                        This entry was posted in <a href="{{ SITEURL }}/{{ article.category.url }}" title="View all posts in {{ article.category }}" rel="category">{{ article.category }}</a>
+                    {% endif %}
+                    {% if article.tags %}
+                    and tagged 
+                        {% for t in article.tags %}
+                            <a href="{{ SITEURL }}/{{ t.url }}" rel="tag">{{ t }}</a>{% if not loop.last %}, {% endif %}
+                        {%- endfor %}{{ "." }}
+                    {% endif %}
+                    Bookmark the <a href="{{ SITEURL }}/{{ article.url }}" title="Permalink to {{ article.title|striptags }}" rel="bookmark">permalink</a>.
+                {% else %}
+                    {{ "&nbsp;" }}
+                    {%- if article.category.name != "Uncategorized" -%}
+                    <span class="cat-links">
+                        Posted in <a href="{{ SITEURL }}/{{ article.category.url }}" title="View all posts in {{ article.category }}" rel="category">{{ article.category }}</a>
+                    </span>
+                    {%- endif %}
+                    {% if article.tags %}
+                    <span class="sep"> | </span>
+                    <span class="tags-links">
+                    Tagged 
+                    {% for t in article.tags %}
+                        <a href="{{ SITEURL }}/{{ t.url }}" rel="tag">{{ t }}</a>{% if not loop.last %}, {% endif %}
+                    {%- endfor %}
+                    </span>
+                    {% endif %}
+                {% endif %}
+            </footer><!-- /.post-info -->
+        {%- endmacro %}

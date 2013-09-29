@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block content %}
+    {% import "article_macros.html" as macros  %}
+    {{ macros.article_macro(article, True) }}
+{% endblock %}
